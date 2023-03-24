@@ -17,6 +17,7 @@ import { queryClient } from "..";
 import { useContext, useRef, useState } from "react";
 import { ShowDialogContext } from "../App";
 import MailToLink from "../elements/MailToLink";
+import MemberDialog from "../elements/MemberDialog";
 
 
 
@@ -156,12 +157,13 @@ export default function MemberListPage() {
         )
     }
 
-    const onHideDialog = (save) => {
+
+    const onSave = (save, member) => {
         showDialog.setter(false);
         if (save) {
             if (adding) {
                 //write editingMember to the api
-                addMutation.mutate(editingMember, {
+                addMutation.mutate(member, {
                     onSuccess: (addedMember) => {
                         queryClient.invalidateQueries(["members"]);
 
@@ -175,7 +177,7 @@ export default function MemberListPage() {
 
             } else {
                 // update editingMember record via api
-                updateMutation.mutate(editingMember, {
+                updateMutation.mutate(member, {
                     onSuccess: (updatedMember) => {
                         queryClient.invalidateQueries(["members"]);
                         toast.current.show({
@@ -189,19 +191,6 @@ export default function MemberListPage() {
         }
     }
 
-    const dialogFooter = (
-        <div>
-            <Button
-                label="save"
-                icon="pi pi-check"
-                onClick={() => onHideDialog(true)}
-            />
-            <Button
-                label="cancel"
-                icon="pi pi-times"
-                onClick={() => onHideDialog(false)} />
-        </div>
-    );
 
     return (
         <>
@@ -216,6 +205,8 @@ export default function MemberListPage() {
                     showDialog.setter(true)
                 }} />
 
+            {/*<MemberTable members={members} onEdit={()=>{}} onDelete={()=>{}}/>*/}
+
             <DataTable value={members}>
                 <Column field="id" header="Id" body={formatIdColumn}></Column>
                 <Column field="name" header="Name"></Column>
@@ -227,67 +218,13 @@ export default function MemberListPage() {
 
             <ConfirmDialog />
             <Toast ref={toast} />
-            <Dialog
-                footer={dialogFooter}
-                visible={showDialog.value}
-                onHide={onHideDialog}
-                style={{ width: '50vw' }}>
 
-                { adding ? <h3>Add Member</h3> : <h3>Edit Member</h3> }
+            <MemberDialog 
+                visible={ showDialog.value }
+                onSave={ onSave }
+                mode={ adding }
+                member={ editingMember }/>
 
-                <span className="p-float-label">
-                    <InputText
-                        id="newName"
-                        value={editingMember.name}
-                        style={{ width: '100%' }}
-                        onChange={
-                            (e) => setEditingMember(
-                                current => {
-                                    return {
-                                        ...current,
-                                        name: e.target.value
-                                    }
-                                }
-                            )
-                        }
-                    />
-                    <label htmlFor="newName">Name</label>
-                </span>
-                <br />
-                <span className="p-float-label">
-                    <InputText
-                        id="newEmail"
-                        value={editingMember.email}
-                        style={{ width: '100%' }}
-                        onChange={
-                            (e) => setEditingMember(
-                                current => {
-                                    return {
-                                        ...current,
-                                        email: e.target.value
-                                    }
-                                }
-                            )
-                        }
-                    />
-                    <label htmlFor="newEmail">Email</label>
-                </span>
-
-                Active:
-                <Checkbox
-                    checked={editingMember.active}
-                    onChange={
-                        (evt) => setEditingMember(
-                            current => {
-                                return {
-                                    ...current,
-                                    active: evt.target.checked
-                                }
-                            }
-                        )
-                    }
-                />
-            </Dialog>
         </>
     )
 }

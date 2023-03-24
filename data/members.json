@@ -1,16 +1,16 @@
 {
   "members": [
     {
-      "id": 4,
       "name": "Dan",
       "email": "dan@gmail.com",
-      "active": true
+      "active": false,
+      "id": 4
     },
     {
-      "id": 5,
       "name": "Eve",
       "email": "eve@gmail.com",
-      "active": false
+      "active": true,
+      "id": 5
     },
     {
       "name": "Fred",
@@ -25,16 +25,16 @@
       "id": 8
     },
     {
-      "name": "Alice",
-      "email": "alice@gmail.com",
-      "active": false,
-      "id": 11
-    },
-    {
       "name": "Adrian",
       "email": "aidan@gmail.com",
       "active": true,
       "id": 12
+    },
+    {
+      "name": "Harriet",
+      "email": "harriet@gmail.com",
+      "active": false,
+      "id": 14
     }
   ]
 }
