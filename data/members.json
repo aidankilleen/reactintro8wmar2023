@@ -1,18 +1,6 @@
 {
   "members": [
     {
-      "name": "Alicezxvzxcvcxv",
-      "email": "alice@gmail.com",
-      "active": false,
-      "id": 1
-    },
-    {
-      "name": "Bob",
-      "email": "bob@gmail.com",
-      "active": false,
-      "id": 2
-    },
-    {
       "id": 4,
       "name": "Dan",
       "email": "dan@gmail.com",
@@ -25,34 +13,28 @@
       "active": true
     },
     {
-      "name": "Aidan",
-      "email": "aidan@gmail.com",
-      "active": true,
-      "id": 6
-    },
-    {
       "name": "Fred",
       "email": "fred@gmail.com",
       "active": false,
       "id": 7
     },
     {
-      "name": "New User",
-      "email": "new.user@gmail.com",
+      "name": "Bob",
+      "email": "bob@gmail.com",
       "active": true,
       "id": 8
     },
     {
-      "name": "Another New Member",
-      "email": "anm@gmail.com",
-      "active": true,
-      "id": 9
+      "name": "Alice",
+      "email": "alice@gmail.com",
+      "active": false,
+      "id": 11
     },
     {
-      "name": "sdfa",
-      "email": "asdf",
+      "name": "Aidan",
+      "email": "aidan@gmail.com",
       "active": true,
-      "id": 10
+      "id": 12
     }
   ]
 }
